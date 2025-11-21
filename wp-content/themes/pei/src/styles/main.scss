@@ -1,0 +1,15 @@
+// Global variables
+$primary: #A3783C;
+$secondary: #171717;
+
+:root {
+  --primary: #{$primary};
+  --secondary: #{$secondary};
+}
+
+// Import existing classic CSS if needed (optional):
+// You may progressively migrate style.css into SCSS partials.
+
+body {
+  color: var(--secondary);
+}

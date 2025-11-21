@@ -1,0 +1,78 @@
+# -----------------------------
+# WordPress project .gitignore
+# Purpose: keep secrets and volatile files out of Git
+# -----------------------------
+
+# Core secrets and environment
+wp-config.php
+wp-config-*.php
+.env
+.env.*
+.htaccess
+web.config
+
+# WordPress runtime directories (generated/volatile)
+wp-content/uploads/
+wp-content/upgrade/
+wp-content/cache/
+wp-content/wflogs/
+wp-content/ai1wm-backups/
+wp-content/backup-*/
+wp-content/debug.log
+wp-content/advanced-cache.php
+wp-content/object-cache.php
+
+# Third-party plugins and themes (track your custom theme only)
+# Adjust as needed if you maintain custom plugins in-repo.
+wp-content/plugins/
+wp-content/themes/*
+!wp-content/themes/pei/
+
+# Caches and logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Dependencies / build artifacts
+node_modules/
+vendor/
+dist/
+build/
+.tmp/
+.cache/
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE/editor settings
+.idea/
+.vscode/
+*.iml
+
+# Archives & exports
+*.zip
+*.tar
+*.tar.gz
+*.rar
+
+# Composer
+composer.lock
+
+# SASS/LESS caches
+.sass-cache/
+*.map
+
+# Misc
+*.swp
+*.swo
+
+# If you have custom must-use plugins you want tracked, remove the next line
+wp-content/mu-plugins/*
+
+# If you have a custom uploads policy, adjust the uploads ignore as needed.
+# You can whitelist specific subfolders like this (example):
+# !wp-content/uploads/.gitkeep

@@ -1,0 +1,28 @@
+{
+  "name": "pei-theme",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --config vite.config.js",
+    "build": "vite build --config vite.config.js && node ./scripts/optimize-images.mjs",
+    "preview": "vite preview --config vite.config.js",
+    "images": "node ./scripts/optimize-images.mjs"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "cssnano": "^6.1.2",
+    "globby": "^14.0.2",
+    "postcss": "^8.4.47",
+    "sass": "^1.80.6",
+    "vite": "^5.4.10"
+  },
+  "dependencies": {
+    "imagemin": "^9.0.1",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-pngquant": "^10.0.0",
+    "imagemin-svgo": "^11.0.1",
+    "imagemin-webp": "^8.0.0"
+  }
+}

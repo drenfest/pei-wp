@@ -1,0 +1,568 @@
+
+/* Header tightening on desktop (PEI spec) */
+@media (min-width:768px){
+  /* Keep the overall header container tight while allowing visual overflow */
+  .site-header .container {
+    max-height:50px;
+    display:flex;            /* for vertical centering of the inner row */
+    align-items:center;
+    overflow:visible;        /* allow logo to visually overflow without clipping */
+  }
+
+  /* Ensure the logo area centers within the 50px band without distortion */
+  .site-header .site-branding {
+    min-height:50px;         /* align visually with the container height */
+    padding:0;               /* remove extra vertical padding so it fits the band */
+    align-items:center;      /* already flex; make sure items are centered */
+      max-width:200px;
+  }
+
+  /* Nav strip height and centering; keep beige bar and shadows visible */
+  .col.main-nav-wrap {
+    max-height:60px;
+    display:flex;
+    align-items:center;
+    overflow:visible;        /* avoid clipping button shadows */
+  }
+
+  /* Slightly tighter vertical padding so buttons remain fully visible inside 60px */
+  .nav-inner {
+    padding:8px 0;           /* was 12px/10px; keep a balanced, centered look */
+  }
+  .site-main{
+      margin-top: 150px;
+  }
+}
+
+/* Removed Bootstrap navbar block in favor of lean custom navigation */
+
+/* ===============================
+   Contact Form 7 � PEI theme styles
+   Target: the form container with class .cf7-tailwind
+   =============================== */
+
+.cf7-tailwind{
+  /* layout */
+  display:grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1rem 1.25rem;
+
+  /* card look */
+  background: var(--light);
+  color: var(--secondary);
+  border: 1px solid var(--accent);
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+}
+
+/* each field wrapper */
+.cf7-tailwind .relative{ grid-column: span 12; }
+
+/* go 2-up on >=768px */
+@media (min-width: 768px){
+  .cf7-tailwind .relative{ grid-column: span 6; }
+  /* make message + submit full width as the last two blocks */
+  .cf7-tailwind .relative:nth-last-of-type(2),
+  .cf7-tailwind .relative:last-of-type{ grid-column: 1 / -1; }
+}
+
+/* labels */
+.cf7-tailwind label{
+  display:block;
+  margin-bottom: .375rem;
+  font-weight: 600;
+  font-size: .95rem;
+  color: var(--secondary);
+}
+.cf7-tailwind label .font-normal{ font-weight: 400; color: var(--grey); }
+
+/* base controls */
+.cf7-tailwind input[type="text"],
+.cf7-tailwind input[type="email"],
+.cf7-tailwind input[type="tel"],
+.cf7-tailwind input[type="number"],
+.cf7-tailwind select,
+.cf7-tailwind textarea{
+  appearance: none;
+  width: 100%;
+  background: #fff;
+  color: var(--secondary);
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  padding: .625rem .75rem;
+  line-height: 1.4;
+  transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
+}
+
+/* heights */
+.cf7-tailwind input[type="text"],
+.cf7-tailwind input[type="email"],
+.cf7-tailwind input[type="tel"],
+.cf7-tailwind input[type="number"],
+.cf7-tailwind select{ height: 42px; }
+.cf7-tailwind textarea{ min-height: 140px; resize: vertical; }
+
+/* placeholders */
+.cf7-tailwind ::placeholder{ color: color-mix(in srgb, var(--grey) 70%, white); opacity: 1; }
+/* Fallback for browsers without color-mix */
+@supports not (color: color-mix(in srgb, black, white)){
+  .cf7-tailwind ::placeholder{ color: #9aa2a7; }
+}
+
+/* focus styles (accessible) */
+.cf7-tailwind input:focus,
+.cf7-tailwind select:focus,
+.cf7-tailwind textarea:focus{
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(163, 120, 60, .25); /* primary ring */
+}
+
+/* hover */
+.cf7-tailwind input:hover,
+.cf7-tailwind select:hover,
+.cf7-tailwind textarea:hover{
+  border-color: color-mix(in srgb, var(--primary) 40%, var(--accent));
+}
+@supports not (color: color-mix(in srgb, black, white)){
+  .cf7-tailwind input:hover,
+  .cf7-tailwind select:hover,
+  .cf7-tailwind textarea:hover{ border-color: #cdbfa9; }
+}
+
+/* select arrow */
+.cf7-tailwind select{
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--grey) 50%),
+    linear-gradient(135deg, var(--grey) 50%, transparent 50%),
+    linear-gradient(to right, transparent, transparent);
+  background-position:
+    calc(100% - 18px) calc(50% - 3px),
+    calc(100% - 12px) calc(50% - 3px),
+    calc(100% - 2.25rem) 50%;
+  background-size: 6px 6px, 6px 6px, 1px 60%;
+  background-repeat: no-repeat;
+  padding-right: 2.5rem;
+}
+
+/* error state from CF7 */
+.cf7-tailwind .wpcf7-not-valid{
+  border-color: var(--danger) !important;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, .15);
+}
+.cf7-tailwind .wpcf7-not-valid-tip{
+  display:block;
+  margin-top:.35rem;
+  font-size: .85rem;
+  color: var(--danger);
+}
+
+/* Submit button */
+.cf7-tailwind .wpcf7-submit{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .6rem 1.25rem;
+  font-weight: 700;
+  border-radius: 999px;
+  border: 2px solid var(--primary);
+  background: var(--primary);
+  color: #fff;
+  cursor: pointer;
+  transition: transform .12s ease, background-color .12s ease, border-color .12s ease;
+}
+.cf7-tailwind .wpcf7-submit:hover{
+  transform: translateY(-1px);
+  background: #8E6A35; /* slightly darker than --primary */
+  border-color: #8E6A35;
+}
+.cf7-tailwind .wpcf7-submit:active{ transform: translateY(0); }
+.cf7-tailwind .wpcf7-submit:disabled{
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+/* spinner next to the button */
+.cf7-tailwind .wpcf7-spinner{
+  margin-left:.5rem;
+  width: 18px; height: 18px;
+  border: 2px solid var(--accent);
+  border-left-color: var(--primary);
+}
+
+/* CF7 response message */
+.wpcf7-form .wpcf7-response-output{
+  margin-top: 1rem !important;
+  border-radius: 10px;
+  padding: .75rem 1rem;
+  border-width: 2px;
+  font-weight: 600;
+}
+
+/* Style by status (CF7 sets data-status on form and/or classes on the response element) */
+.wpcf7-form[data-status="sent"] .wpcf7-response-output,
+.wpcf7 .wpcf7-mail-sent-ok{
+  color: #0a3622;
+  background: #d1e7dd;
+  border-color: var(--success);
+}
+.wpcf7-form[data-status="invalid"] .wpcf7-response-output,
+.wpcf7 .wpcf7-validation-errors{
+  color:#664d03;
+  background:#fff3cd;
+  border-color: var(--warning);
+}
+.wpcf7-form[data-status="failed"] .wpcf7-response-output,
+.wpcf7 .wpcf7-mail-sent-ng{
+  color:#58151c;
+  background:#f8d7da;
+  border-color: var(--danger);
+}
+
+/* hide CF7 hidden fieldset */
+.hidden-fields-container{ display:none; }
+
+/* optional: tighten default <p> spacing inside fields */
+.cf7-tailwind p{ margin: 0; }
+
+/* Make the "Get a Quote" button style reusable (if needed elsewhere) */
+.btn-primary-pei{
+  border:2px solid var(--primary);
+  background: var(--primary);
+  color:#fff;
+  border-radius:999px;
+  font-weight:700;
+  padding:.6rem 1.25rem;
+}
+.btn-primary-pei:hover{
+  background:#8E6A35; border-color:#8E6A35;
+}
+/* --- Fix misalignment in CF7 form --- */
+
+/* 1) Kill extra <br> that CF7 (and your markup) insert around labels */
+.cf7-tailwind label br,
+.cf7-tailwind .relative > p > br{
+  display:none !important;
+}
+
+/* 2) Make each field wrapper consistent */
+.cf7-tailwind .relative{ grid-column: span 12; }
+.cf7-tailwind .relative > p{
+  display:grid;
+  gap:.375rem;          /* space between label and control */
+  margin:0;
+}
+
+/* 3) Two columns on md+ */
+@media (min-width: 768px){
+  .cf7-tailwind .relative{ grid-column: span 6; }
+
+  /* Force the textarea row and the submit row to full width */
+  .cf7-tailwind .relative:has(textarea),
+  .cf7-tailwind .relative:has(.wpcf7-submit){
+    grid-column: 1 / -1;
+  }
+}
+
+/* 4) Optional: password-manager icon can push fields�hide it */
+.cf7-tailwind [data-lastpass-icon-root]{
+  display:none !important;
+}
+
+/* Footer */
+
+.site-footer-top {
+  background: #262b32; /* dark slate like header strip */
+  color: #ffffff;
+  padding: 32px 0 28px;
+}
+
+.footer-row {
+  row-gap: 24px;
+}
+
+.footer-col {
+  text-align: center; /* center on mobile only */
+}
+
+/* Mobile-first: stack columns */
+.footer-links,
+.footer-logo,
+.footer-contact {
+  flex: 1 1 100%;
+}
+
+.footer-heading {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 10px;
+  position: relative;
+  text-transform: none;
+}
+
+.footer-heading::before {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: #f2e0b8; /* beige bar */
+  margin-bottom: 6px;
+}
+
+.footer-navigation .footer-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center links on mobile */
+}
+
+.footer-navigation .footer-menu li {
+  margin: 4px 0;
+}
+
+.footer-navigation .footer-menu a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.footer-navigation .footer-menu a:hover,
+.footer-navigation .footer-menu a:focus {
+  text-decoration: underline;
+}
+
+/* Bullet icons */
+.footer-navigation .footer-menu li::before,
+.footer-contact-list li::before {
+  content: "➤";
+  margin-right: 6px;
+  font-size: 10px;
+  color: #c89226;
+}
+
+/* Center logo col */
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-logo img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.footer-site-name {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* Contact + hours */
+
+.footer-contact-block,
+.footer-hours-block {
+  margin-bottom: 18px;
+}
+
+.footer-contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Mobile: center contact text and copyright */
+.footer-contact-list,
+.footer-copy { text-align:center; }
+
+.footer-contact-list li {
+  margin: 4px 0;
+}
+
+.footer-contact-list a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.footer-contact-list a:hover,
+.footer-contact-list a:focus {
+  text-decoration: underline;
+}
+
+/* Bottom bar */
+
+.site-footer-bottom {
+  background: #f2e0b8; /* beige strip */
+  text-align: center;
+  padding: 10px 0;
+  font-size: 14px;
+  color: #222;
+}
+
+.footer-copy {
+  margin: 0;
+}
+
+/* Desktop layout */
+
+@media (min-width: 780px) {
+  .footer-links,
+  .footer-logo,
+  .footer-contact {
+    flex: 0 0 33.3333%;
+    max-width: 33.3333%;
+  }
+
+  .footer-links {
+    align-self: flex-start;
+  }
+
+  /* Desktop: left-align text for non-logo columns */
+  .footer-col { text-align: left; }
+  .footer-contact { text-align: left; }
+  /* Keep the center logo centered on desktop */
+  .footer-logo { justify-content: center; text-align: center; }
+  .footer-navigation .footer-menu { align-items: flex-start; }
+}
+/*
+Theme Name: PEI Lean Theme
+Author: You
+Version: 1.1
+Text Domain: pei
+
+Notes (structure/tradeoffs):
+- Lean, mobile-first header and custom 1/4 + 3/4 layout; no frameworks.
+- Customizer logo via the_custom_logo(); primary nav via wp_nav_menu().
+- Mobile hamburger toggles a vertical menu; desktop shows horizontal menu.
+- A11y: focus-visible styles, screen-reader-text helper, aria-expanded on toggle.
+- RTL-friendly using logical margins. Colors chosen for contrast with light beige and dark strip.
+*/
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f5f5f5;
+  color: #262b32;
+}
+
+/* Screen reader only helper */
+.screen-reader-text { position: absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+.screen-reader-text:focus { position: static; width:auto; height:auto; margin:0; clip:auto; }
+
+/* Focus styles */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible { outline:3px solid #2b6cb0; outline-offset:2px; }
+
+/* Theme tokens (lean alternative to any framework variables) */
+:root{
+  --primary: #A3783C;
+  --secondary: #262b32;
+  --light: #ffffff;
+  --accent: #e3d6bf;
+  --grey: #6b7280;
+  --danger: #dc3545;
+  --warning: #ffca2c;
+  --success: #198754;
+}
+
+/* Simple layout system (mobile-first) */
+.container { width:100%; max-width:1200px; margin:0 auto; padding:0 16px; }
+.row { display:flex; flex-wrap:wrap;align-items: center;align-content: center;justify-content: space-between;width: 100%;}
+.col { flex:1 1 100%; min-width:0; }
+@media (min-width:768px){ .col-1-4{flex:0 0 25%;max-width:25%;} .col-3-4{flex:0 0 75%;max-width:75%;} }
+
+/* Header base */
+.site-header { background:#f2e8d0; }
+.site-header-top { display:flex; flex-wrap:wrap; }
+
+/* Logo area */
+.site-branding { background:#262b32; display:flex; align-items:center; justify-content:center; padding:12px 0; flex:1 1 100%;margin-top:154px;max-width:200px; }
+.site-branding a { color:#ffffff; text-decoration:none; font-weight:600; }
+.site-branding img { max-height:200px; height:auto; width:auto; }
+
+/* Nav wrapper */
+.main-nav-wrap { background:#f2e8d0; width:100%; position:relative; }
+.nav-inner { display:flex; align-items:center; justify-content:flex-end; gap:12px; padding:10px 0; }
+.menu-toggle { border:none; background:transparent; cursor:pointer; padding:10px; margin-inline-start:auto; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.menu-toggle span { display:block; width:22px; height:2px; margin:4px 0; background:#262b32; }
+.main-navigation { width:100%; display:flex; flex-direction:column; align-items:flex-end; }
+/* Mobile dropdown panel */
+.main-navigation ul { list-style:none; margin:0; padding:10px 8px 12px; display:none; flex-direction:column; gap:8px; background:#f2e8d0; border-top:1px solid rgba(0,0,0,.08); transform:translateX(6%); transform-origin:right center; opacity:.001; transition:transform .18s ease, opacity .18s ease; }
+.main-navigation.is-open ul { display:flex; transform:translateX(0); opacity:1; }
+.main-navigation li { margin:0; }
+.main-navigation a { display:inline-block; padding:12px 16px; background:#c89226; color:#fff; text-decoration:none; text-transform:uppercase; font-size:13px; letter-spacing:.06em; position:relative; box-shadow:0 3px 0 rgba(0,0,0,.18); transition:transform .08s ease, box-shadow .08s ease, background .15s ease; border-radius:3px; }
+.main-navigation a:hover, .main-navigation a:focus { background:#dca538; transform:translateY(1px); box-shadow:0 2px 0 rgba(0,0,0,.2); }
+/* Reduce layout shift when items wrap */
+.main-navigation li { contain: layout paint; }
+
+/* Submenu base (mobile-first: hidden until toggled) */
+.main-navigation .menu-item-has-children > .sub-menu { display:none; padding:6px 0 0 0; margin:6px 0 0 12px; border-left:2px solid rgba(0,0,0,.12); }
+.main-navigation .menu-item-has-children.submenu-open > .sub-menu { display:block; }
+/* Submenu items should look like plain links on mobile: no background */
+.main-navigation .sub-menu a {
+  background: transparent;
+  box-shadow: none;
+  text-transform: none;
+  font-size: 13px;
+  border-radius: 0;
+  color: var(--secondary);
+  padding: 6px 2px;
+}
+.main-navigation .sub-menu a:hover, .main-navigation .sub-menu a:focus {
+  background: transparent;
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+/* Caret button shown on mobile for submenu parents */
+.submenu-toggle { background:transparent; border:none; padding:8px; margin-inline-start:8px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; color:#262b32; }
+.submenu-toggle:focus-visible { outline:3px solid #2b6cb0; outline-offset:2px; }
+.submenu-toggle .caret { display:inline-block; border:solid currentColor; border-width:0 2px 2px 0; padding:3px; transform:rotate(-45deg); transition:transform .15s ease; }
+.menu-item-has-children.submenu-open > .submenu-toggle .caret { transform:rotate(45deg); }
+
+/* Desktop */
+@media (min-width:768px){
+  .row.site-header-top { flex-wrap:nowrap; }
+  .site-branding { flex:0 0 25%; max-width:25%; padding:16px 0; }
+  .main-nav-wrap { flex:0 0 75%; max-width:75%; display:flex; align-items:flex-end; }
+  .nav-inner { width:100%; padding:12px 0 10px; }
+  .menu-toggle { display:none; }
+  .main-navigation { margin-inline-start:auto; width:auto; display:flex; flex-direction:row; align-items:center; }
+  .main-navigation ul { display:flex !important; flex-direction:row; gap:14px; padding:0; background:transparent; transform:none; opacity:1; border-top:0; }
+  .main-navigation .menu-item-has-children { position:relative; }
+  .main-navigation .menu-item-has-children > a { /* keep button look */ }
+  .main-navigation .menu-item-has-children > .sub-menu {
+    display:none; position:absolute; inset-inline-start:0; top:100%; min-width:200px; background:#262b32; padding:8px; margin:8px 0 0 0; border-radius:4px; box-shadow:0 6px 16px rgba(0,0,0,.25);
+  }
+  .main-navigation .menu-item-has-children:hover > .sub-menu,
+  .main-navigation .menu-item-has-children:focus-within > .sub-menu { display:block; }
+  .main-navigation .sub-menu li { margin:0; }
+  .main-navigation .sub-menu a { display:block; background:transparent; color:#fff; text-transform:none; letter-spacing:0; padding:8px 12px; box-shadow:none; border-radius:3px; }
+  /* Desktop dropdown: keep links background-free; adjust color on hover */
+  .main-navigation .sub-menu a:hover, .main-navigation .sub-menu a:focus {
+    background: transparent;
+    color: #c89226;
+    text-decoration: underline;
+  }
+  /* Hide caret buttons on desktop */
+  .submenu-toggle { display:none !important; }
+}
+
+/* Very small screens hardening */
+@media (max-width:360px){ .main-navigation a{ padding:10px 12px; font-size:12px; } .site-branding img{ max-height:64px; } }
+
+/* RTL */
+html[dir="rtl"] .main-navigation { margin-inline-start:0; margin-inline-end:auto; }
+html[dir="rtl"] .main-navigation .menu-item-has-children > .sub-menu { inset-inline-start:auto; inset-inline-end:0; border-left:0; border-right:2px solid rgba(255,255,255,.08); }
+
+/* Larger logo on desktop */
+@media (min-width:768px){
+  .site-branding img { max-height:200px; }
+  .footer-logo img { max-height:200px; }
+}
