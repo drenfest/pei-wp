@@ -1,0 +1,109 @@
+/* -----------------------------------------
+   HERO – Precision Exteriors Intro
+----------------------------------------- */
+
+.pei-hero {
+  background: #262b32; /* dark slate */
+  padding: 80px 0 90px;
+  color: #262b32;
+    z-index:1;
+}
+
+.pei-hero .container {
+  position: relative;
+}
+
+/* Offset white frame behind hero card */
+.pei-hero-frame {
+  position: relative;
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.pei-hero-frame::before {
+  content: "";
+  position: absolute;
+  top: 24px;
+  right: -40px;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  z-index: 0;
+}
+
+/* Main beige card */
+.pei-hero-card {
+  position: relative;
+  z-index: 1;
+  background: #e3d6bf; /* beige card */
+  padding: 48px 56px;
+  text-align: center;
+  border-radius: 2px;
+}
+
+/* Typography */
+.pei-hero-kicker {
+  font-size: 28px;
+  margin: 0 0 10px;
+  font-weight: 400;
+  font-family: "Georgia", serif;
+}
+
+.pei-hero-title {
+  font-size: 52px;
+  margin: 0 0 18px;
+  font-weight: 700;
+  line-height: 1.1;
+  font-family: "Georgia", serif;
+}
+
+.pei-hero-subtitle {
+  font-size: 18px;
+  margin: 0 0 28px;
+  line-height: 1.45;
+  color: #111;
+}
+
+/* CTA button */
+.pei-hero-cta {
+  display: inline-block;
+  text-transform:uppercase;
+  background: #c89226;
+  color: #fff;
+  padding: 14px 26px;
+  font-weight: 600;
+  border-radius: 4px;
+  text-decoration: none;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.25);
+  transition: transform .12s ease, box-shadow .12s ease, background .15s ease;
+}
+
+.pei-hero-cta:hover {
+  background: #dca538;
+  transform: translateY(1px);
+  box-shadow: 0 3px 0 rgba(0,0,0,.25);
+}
+
+/* Desktop tweaks */
+@media (min-width: 768px) {
+  .pei-hero-card {
+    padding: 60px 80px;
+  }
+
+  .pei-hero-title {
+    font-size: 64px;
+  }
+
+  .pei-hero-kicker {
+    font-size: 32px;
+  }
+
+  .pei-hero-subtitle {
+    font-size: 20px;
+  }
+
+  .pei-hero-frame::before {
+    top: 32px;
+    right: -48px;
+  }
+}

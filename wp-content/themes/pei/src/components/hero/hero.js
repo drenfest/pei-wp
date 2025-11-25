@@ -1,5 +1,5 @@
 // Hero component entry
-import './hero.scss';
+import './hero.css';
 
 // Example interactive behavior
 document.addEventListener('DOMContentLoaded', () => {

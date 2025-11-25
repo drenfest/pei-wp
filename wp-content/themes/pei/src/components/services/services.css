@@ -1,0 +1,166 @@
+.pei-services {
+    width: 100%;
+    background: #262b32;
+    padding: 0 0 50px 0;
+    margin: 0; /* ensure no external margins */
+    display: flow-root; /* prevent top-margin collapse from first child (e.g., H2) */
+}
+
+/* Ensure local stacking context */
+.pei-services .container {
+    position: relative;
+}
+
+/* If a heading is present as the first child, ensure it doesn't introduce extra top spacing */
+.pei-services-heading {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+    font-family: "Georgia", serif;
+}
+
+/* Frame and card behind the services row (hero-like) */
+.pei-services-frame {
+    position: relative;
+    max-width: 880px;
+    margin: 0 auto;
+    z-index: 0; /* sits behind the row */
+}
+
+.pei-services-frame::before {
+    content: "";
+    position: absolute;
+    top: 24px;
+    right: -40px;
+    width: 100%;
+    height: 100%;
+    background: #ffffff; /* white box offset */
+    z-index: 0;
+}
+
+.pei-services-card {
+    position: relative;
+    z-index: 1;
+    background: #e3d6bf; /* tan card */
+    padding: 24px 28px;
+    text-align: center;
+    border-radius: 2px;
+    margin: 0 auto 24px;
+}
+
+.pei-services-row {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 2; /* above the card/frame */
+    margin-top: -60px; /* pull row up to overlap card so layering is visible */
+}
+
+.pei-service-item {
+    position: relative;
+    flex: 1 1 20%;
+    overflow: hidden;
+    height: 600px; /* Increased by 25% from 480px to make images taller */
+    min-width: 0; /* allows flex children to shrink smoothly */
+    transition: flex-basis .3s ease, flex-grow .3s ease;
+    display: block; /* ensure anchors styled as blocks too */
+}
+
+/* Subtle overlay for readability */
+.pei-service-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.28); /* slight dark overlay */
+    pointer-events: none; /* do not block clicks when item is a link */
+    z-index: 1; /* sit above the image, below the label */
+    transition: background .2s ease;
+}
+
+/* IMAGE */
+.pei-service-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Forces perfect equal-height crop */
+    object-position: center;
+    display: block;
+}
+
+/* VERTICAL LABEL */
+.pei-service-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(180deg);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+
+    font-size: 32px;
+    letter-spacing: 4px;
+    font-weight: 600;
+    color: #f2e0b8;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.35);
+    /* Ensure link titles are clickable */
+    pointer-events: auto;
+    text-align: center;
+    text-decoration: none; /* remove underline on label in case nested under <a> */
+    z-index: 2; /* ensure label sits above the overlay */
+}
+
+/* Make entire tile link have no underline in all states */
+.pei-service-item--link,
+.pei-service-item--link:hover,
+.pei-service-item--link:focus,
+.pei-service-item--link:active {
+    text-decoration: none;
+}
+
+/* Provide visible focus outline for keyboard users */
+.pei-service-item--link:focus-visible {
+    outline: 2px solid #f2e0b8;
+    outline-offset: 2px;
+}
+
+/* Optional: Hover contrast lift */
+.pei-service-item:hover img {
+    filter: brightness(1.08);
+}
+
+/* Hover expand behavior: when hovering the row, collapse all items, then expand the hovered item to full width */
+.pei-services-row:hover .pei-service-item {
+    flex: 0 0 0%;
+}
+.pei-services-row:hover .pei-service-item:hover {
+    flex: 1 0 100%;
+}
+
+/* Slightly stronger overlay on hover/focus to further enhance contrast */
+.pei-service-item:hover::after {
+    background: rgba(0, 0, 0, 0.35);
+}
+.pei-service-item--link:focus-visible::after {
+    background: rgba(0, 0, 0, 0.35);
+}
+
+/* Responsive tweaks similar to hero */
+@media (min-width: 768px) {
+    .pei-services-card {
+        padding: 20px 0;
+        margin-bottom: 75px;
+    }
+
+    .pei-services-heading {
+        font-size: 44px;
+    }
+
+    .pei-services-frame::before {
+        top: 32px;
+        right: -48px;
+    }
+
+    .pei-services-row {
+        margin-top: -80px;
+    }
+}
