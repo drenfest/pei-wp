@@ -1,0 +1,190 @@
+/* -----------------------------------------
+   BENEFITS LIST – Layered image + tabs + badges
+----------------------------------------- */
+
+.pei-benefits {
+  background: #262b32; /* match site dark area like hero */
+  padding: 60px 0 0;
+}
+
+.pei-benefits .container { position: relative; }
+
+/* Layered frame/card like the hero */
+.pei-benefits-frame {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.pei-benefits-frame::before {
+  content: "";
+  position: absolute;
+  top: 24px;
+  right: -40px;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  z-index: 0;
+}
+
+.pei-benefits-card {
+  position: relative;
+  z-index: 1;
+  background: #e3d6bf; /* beige */
+  padding: 24px 24px 28px;
+  border-radius: 2px;
+}
+
+.pei-benefits-heading {
+  margin: 0 0 10px;
+  font-size: 32px;
+  line-height: 1.2;
+  font-family: "Georgia", serif;
+}
+
+.pei-benefits-media {
+  position: relative; /* full-bleed media wrapper */
+  z-index: 2; /* image/list layer above the beige card */
+  width: 100vw; /* expand to viewport width */
+  margin-left: calc(50% - 50vw); /* center the full-bleed block */
+  margin-right: calc(50% - 50vw);
+  /* Reduce visible media height (cropped) to ~75% of former look.
+     Tweak the variable below as needed. */
+  --pei-benefits-media-h: clamp(280px, 42vw, 560px);
+  height: var(--pei-benefits-media-h);
+  overflow: hidden; /* crop the image when height is constrained */
+}
+/* Overlay that holds a container to constrain the list while image is full-bleed */
+.pei-benefits-list-overlay {
+  position: absolute;
+  inset: 0; /* span entire media area */
+  display: block;
+  z-index: 3; /* above image */
+}
+.pei-benefits-list-overlay .container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* center container vertically, keep horizontally centered to page */
+  width: 100%;
+}
+.pei-benefits__image {
+  position: relative;
+  z-index: 2; /* ensure image sits above card but below list */
+  width: 100%;
+  height: 100%; /* fill the constrained media height */
+  object-fit: cover; /* crop without distortion */
+  display: block;
+  border-radius: 2px;
+}
+
+/* Stacked benefit tabs - now flow inside the container overlay, align left */
+.pei-benefits-list {
+  position: static;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 16px; /* left offset within container to match visual */
+}
+.pei-benefits-item {
+  background: #c89226; /* gold */
+  color: #fff;
+  font-weight: 700;
+  text-transform: none;
+  font-size: 18px;
+  line-height: 1.25;
+  padding: 14px 18px;
+  border-radius: 2px;
+  box-shadow: 0 3px 6px rgba(0,0,0,.35);
+  max-width: 580px;
+}
+.pei-benefits-item span { display: inline-block; }
+
+/* Center the heading text inside the beige card */
+.pei-benefits-heading { text-align: center; }
+
+/* Badges row (exactly 3) */
+.pei-benefits-badges {
+  /* Position badges so half of their height overlaps the image above */
+  margin: 0 auto 0; /* reset top margin; overlap handled by transform */
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  position: relative;
+  z-index: 4; /* above image/list overlay */
+  transform: translateY(-50%);
+  /* Cap badge height to avoid covering the list */
+  --pei-badge-max-h: 150px;
+}
+
+.pei-benefit-badge {
+  position: relative;
+  max-height: var(--pei-badge-max-h);
+}
+.pei-benefit-badge__bg {
+  width: 100%;
+  height: var(--pei-badge-max-h);
+  max-height: var(--pei-badge-max-h);
+}
+.pei-benefit-badge__bg svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 6px 8px rgba(0,0,0,.35));
+}
+
+.pei-benefit-badge__content {
+  position: absolute;
+  inset: 0;
+  padding: 14px 14px 24px; /* leave space near bottom for point/edge */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.4;
+  max-height: calc(var(--pei-badge-max-h) - 10px);
+  overflow: hidden auto; /* prevent content from overflowing beyond 150px */
+  /* Make all text white inside badges by default */
+  color: #fff;
+}
+
+/* Ensure all nested text/links remain white in badges */
+.pei-benefit-badge__content *,
+.pei-benefit-badge__content a,
+.pei-benefit-badge__content a:visited,
+.pei-benefit-badge__content a:hover,
+.pei-benefit-badge__content a:focus,
+.pei-benefit-badge__content strong,
+.pei-benefit-badge__content b,
+.pei-benefit-badge__content em,
+.pei-benefit-badge__content i {
+  color: #fff;
+}
+
+/* Preserve underline if present, but match the white color */
+.pei-benefit-badge__content a,
+.pei-benefit-badge__content a:visited,
+.pei-benefit-badge__content a:hover,
+.pei-benefit-badge__content a:focus {
+  text-decoration-color: currentColor;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .pei-benefits-card { padding: 28px 28px 34px; }
+  .pei-benefits-heading { font-size: 36px; }
+  .pei-benefits-frame::before { top: 32px; right: -48px; }
+}
+
+@media (max-width: 767px) {
+  /* On small screens, make overlay non-fixed so list appears below image naturally */
+  .pei-benefits-list-overlay { position: static; }
+  .pei-benefits-list-overlay .container { position: static; transform: none; left: auto; top: auto; }
+  .pei-benefits-list { position: static; margin-top: 12px; padding-left: 0; }
+  .pei-benefits-item { max-width: none; }
+  /* On mobile, let the image size naturally and disable the overlap if it causes crowding */
+  .pei-benefits-media { height: auto; }
+  .pei-benefits__image { height: auto; object-fit: cover; }
+  .pei-benefits-badges { grid-template-columns: 1fr; transform: none; margin-top: 16px; }
+}

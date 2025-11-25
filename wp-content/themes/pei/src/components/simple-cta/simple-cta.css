@@ -1,0 +1,101 @@
+/* SIMPLE CTA – mobile-first styling matching provided design */
+.pei-simple-cta {
+  position: relative;
+  margin: 0; /* match other blocks (no external margins) */
+  background: #262b32; /* same dark background as other blocks */
+  padding: 0 0 100px; /* vertical rhythm similar to services/hero */
+  display: flow-root; /* prevent top-margin collapse */
+}
+
+.pei-simple-cta .container {
+  position: relative;
+}
+
+/* Offset white frame behind the beige card */
+.pei-simple-cta__frame {
+  position: relative;
+}
+
+.pei-simple-cta__frame::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: -18px;
+  bottom: -18px;
+  height: 70%;
+  background: #ffffff;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+  z-index: 0;
+}
+
+.pei-simple-cta__card {
+  position: relative;
+  z-index: 1;
+  background: #e3d6bf; /* beige card to match other components */
+  border-radius: 0;
+  padding: 18px 18px;
+}
+
+.pei-simple-cta__message { color: #111; }
+
+.pei-simple-cta__title {
+  margin: 0 0 6px 0;
+  font-size: 22px;
+  line-height: 1.25;
+  font-weight: 600;
+}
+
+.pei-simple-cta__subtitle {
+  margin: 0 0 14px 0;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.pei-simple-cta__action { }
+
+.pei-simple-cta__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #c79233; /* golden */
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 18px;
+  padding: 12px 16px;
+  border-radius: 2px;
+  box-shadow: 0 6px 0 rgba(0,0,0,0.15), 0 2px 10px rgba(0,0,0,0.16);
+}
+
+.pei-simple-cta__button:hover,
+.pei-simple-cta__button:focus {
+  filter: brightness(0.95);
+}
+
+.pei-simple-cta__icon {
+  display: inline-flex;
+}
+
+/* Decorative shadow bar under the section (to simulate screenshot depth) */
+.pei-simple-cta__shadow {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0;
+}
+
+/* Desktop enhancements */
+@media (min-width: 768px) {
+  .pei-simple-cta__card {
+    padding: 24px 24px;
+  }
+  .pei-simple-cta__title { font-size: 24px; }
+  .pei-simple-cta__subtitle { font-size: 18px; margin-bottom: 0; }
+  .pei-simple-cta__card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 24px;
+  }
+}

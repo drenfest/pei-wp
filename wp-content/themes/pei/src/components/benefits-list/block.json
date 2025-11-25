@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "pei/benefits-list",
+  "title": "Benefits List",
+  "category": "pei",
+  "icon": "list-view",
+  "description": "Layered image card with stacked benefit tabs and optional three badges.",
+  "textdomain": "pei",
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "heading": { "type": "string", "default": "" },
+    "imageId": { "type": "number", "default": 0 },
+    "imageUrl": { "type": "string", "default": "" },
+    "benefits": { "type": "string", "default": "" },
+    "useBadges": { "type": "boolean", "default": false },
+    "badgeHtml1": { "type": "string", "default": "" },
+    "badgeHtml2": { "type": "string", "default": "" },
+    "badgeHtml3": { "type": "string", "default": "" }
+  },
+  "render": "file:./benefits-list.php"
+}

@@ -1,0 +1,61 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "pei/hero",
+  "version": "1.0.0",
+  "title": "Hero",
+  "category": "pei",
+  "icon": "slides",
+  "description": "PEI hero section with title, subtitle, text and optional CTA.",
+  "keywords": ["pei", "hero", "header"],
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": ["full", "wide"]
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "subtitle": {
+      "type": "string",
+      "default": ""
+    },
+    "text": {
+      "type": "string",
+      "default": ""
+    },
+    "link_location": {
+      "type": "string",
+      "default": ""
+    },
+    "link_text": {
+      "type": "string",
+      "default": ""
+    },
+    "linkMode": {
+      "type": "string",
+      "enum": ["page", "custom"],
+      "default": "custom"
+    },
+    "linkPageId": {
+      "type": "number",
+      "default": 0
+    },
+    "linkCustom": {
+      "type": "string",
+      "default": ""
+    },
+    "linkNoFollow": {
+      "type": "boolean",
+      "default": false
+    },
+    "linkNewTab": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "usesContext": ["postId", "postType"],
+  "render": "file:./hero.php"
+}

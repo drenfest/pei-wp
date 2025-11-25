@@ -1,0 +1,36 @@
+/*
+  Editor-only styles for block previews
+  - Keep front-end appearance while disabling interactions that don't make sense in the editor
+  - Scope to the block editor iframe/content via .editor-styles-wrapper
+*/
+
+/* Disable navigation inside the editor canvas */
+.editor-styles-wrapper .pei-hero a,
+.editor-styles-wrapper .pei-service-item--link {
+  pointer-events: none;
+  cursor: default;
+}
+
+/* Neutralize hover-driven layout changes for Services in editor */
+.editor-styles-wrapper .pei-services-row:hover .pei-service-item {
+  /* Keep equal columns instead of collapsing/expanding on hover */
+  flex: 1 1 20%;
+}
+.editor-styles-wrapper .pei-services-row:hover .pei-service-item:hover {
+  flex: 1 1 20%;
+}
+
+/* Neutralize hover visual effects for Services (keep overlay consistent) */
+.editor-styles-wrapper .pei-service-item:hover img {
+  filter: none;
+}
+.editor-styles-wrapper .pei-service-item:hover::after,
+.editor-styles-wrapper .pei-service-item--link:focus-visible::after {
+  background: rgba(0, 0, 0, 0.28);
+}
+
+/* Optional: ensure editor canvas shows full-width blocks nicely */
+.editor-styles-wrapper .pei-hero,
+.editor-styles-wrapper .pei-services {
+  box-sizing: border-box;
+}

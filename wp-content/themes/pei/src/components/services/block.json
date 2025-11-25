@@ -1,0 +1,50 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "pei/services",
+  "version": "1.0.0",
+  "title": "Services Row",
+  "category": "pei",
+  "icon": "screenoptions",
+  "description": "Five-wide services strip with images and vertical labels.",
+  "keywords": ["pei", "services", "grid"],
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": ["full", "wide"]
+  },
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "default": "Services"
+    },
+    "items": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number" },
+          "url": { "type": "string" },
+          "title": { "type": "string" },
+          "pageId": { "type": "number" }
+        }
+      }
+    },
+    "images": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      }
+    },
+    "titles": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "render": "file:./services.php"
+}

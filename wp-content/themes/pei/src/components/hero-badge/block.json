@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "pei/hero-badge",
+  "version": "1.0.0",
+  "title": "Hero Badge",
+  "category": "pei",
+  "parent": ["pei/hero-badges"],
+  "icon": "award",
+  "description": "A single badge within the Hero Badges row.",
+  "keywords": ["pei", "badge"],
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "className": {
+      "type": "string"
+    }
+  },
+  "render": "file:./hero-badge.php"
+}

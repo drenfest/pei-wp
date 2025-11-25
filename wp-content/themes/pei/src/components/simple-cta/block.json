@@ -1,0 +1,48 @@
+{
+  "apiVersion": 2,
+  "name": "pei/simple-cta",
+  "title": "Simple CTA",
+  "category": "pei",
+  "description": "Call-to-action banner with message and a prominent button. Mobile-first.",
+  "icon": "phone",
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
+  },
+  "attributes": {
+    "message": {
+      "type": "string",
+      "default": "Call Anytime — We're Here 24/7\nEmergency service available day or night."
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "815-990-7796"
+    },
+    "phone": {
+      "type": "string",
+      "default": "815-990-7796"
+    },
+    "linkType": {
+      "type": "string",
+      "default": "custom"
+    },
+    "pageId": {
+      "type": "number",
+      "default": 0
+    },
+    "customUrl": {
+      "type": "string",
+      "default": "tel:815-990-7796"
+    },
+    "className": {
+      "type": "string"
+    }
+  },
+  "editorScript": "file:./simple-cta-editor.js",
+  "style": "file:./simple-cta.css",
+  "editorStyle": "file:./simple-cta.css"
+}

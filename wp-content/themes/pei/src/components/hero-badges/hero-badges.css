@@ -1,0 +1,78 @@
+.hero-badges {
+    position: relative;
+    width: 100%;
+    display: block;
+    padding-bottom: 3rem;
+}
+
+/* IMAGE */
+.hero-badges__image-wrapper {
+    position: relative;
+    z-index: 2;
+}
+.hero-badges__image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* WHITE OFFSET BEHIND IMAGE */
+.hero-badges__image-offset {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 0;
+    bottom: 0;
+    background: #ffffff;
+    z-index: 1;
+    border-radius: 4px;
+}
+
+/* BENEFIT LIST (STACKED VERTICAL ITEMS) */
+.hero-badges__benefit-list {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.hero-badges__benefit-item {
+    background: #f8eacb;
+    padding: 6px 12px;
+    border-radius: 3px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+}
+
+/* BADGE ROW – ALWAYS 3 BADGES */
+.hero-badges__badge-row {
+    position: relative;
+    z-index: 4;
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+/* BADGE ITEM (pendant shape) */
+.hero-badges__badge {
+    background: #f9e8c8;
+    padding: 1rem 1rem 2rem;
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+.hero-badges__badge-title {
+    margin: 0 0 .5rem;
+    font-size: .95rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.hero-badges__badge-content {
+    font-size: .85rem;
+    line-height: 1.4;
+}

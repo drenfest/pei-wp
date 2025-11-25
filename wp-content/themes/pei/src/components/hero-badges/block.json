@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "pei/hero-badges",
+  "version": "1.0.0",
+  "title": "Hero Badges",
+  "category": "pei",
+  "icon": "awards",
+  "description": "Hero area with background image, benefit chips, and a row of badges.",
+  "keywords": ["pei", "hero", "badges", "benefits"],
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": ["full", "wide"]
+  },
+  "attributes": {
+    "imageId": {
+      "type": "number",
+      "default": 0
+    },
+    "imageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "benefits": {
+      "type": "string",
+      "default": ""
+    },
+    "offsetClass": {
+      "type": "string",
+      "default": "offset-top-left"
+    }
+  },
+  "usesContext": ["postId", "postType"],
+  "render": "file:./hero-badges.php"
+}
