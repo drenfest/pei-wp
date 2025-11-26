@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "pei/why-wait",
+  "version": "1.0.0",
+  "title": "Why Wait CTA",
+  "category": "pei",
+  "icon": "phone",
+  "description": "Two-column CTA panel with headline and call button.",
+  "supports": { "html": false, "anchor": true, "align": ["wide", "full"] },
+  "attributes": {
+    "title": { "type": "string", "default": "Why Wait?" },
+    "subtitle": { "type": "string", "default": "Fast, friendly service at your convenience. Let's solve your issue today — we're just a phone call away." },
+    "ctaTitle": { "type": "string", "default": "Call Anytime — We're Here 24/7" },
+    "ctaSubtitle": { "type": "string", "default": "Emergency service available day or night." },
+    "phone": { "type": "string", "default": "(815) 990-7996" },
+    "phoneHref": { "type": "string", "default": "tel:+18159907996" }
+  },
+  "render": "file:./why-wait.php"
+}

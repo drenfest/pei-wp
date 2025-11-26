@@ -1,0 +1,14 @@
+.pei-why-us {
+  background: var(--secondary, #d9230f);
+  position: relative;
+  padding: 3rem 0;
+}
+.pei-why-us__shadow { position:absolute; inset:0; pointer-events:none; box-shadow: inset 0 80px 120px rgba(0,0,0,0.2); }
+.pei-why-us__media img { width:100%; height:auto; border-radius:6px; box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
+.pei-why-us__panel { background: rgba(23,23,23,0.7); color:#fff; border-radius:8px; padding: 1.25rem; }
+.pei-why-us__heading { text-align:center; margin: 0 0 1rem; color:#fff; }
+.pei-why-us__list { list-style:none; margin:0; padding:0; display:grid; gap:.75rem; }
+.pei-why-us__item { background: rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.08); border-radius:6px; padding:.75rem 1rem; }
+.pei-why-us__item-title { font-weight:700; margin-bottom:.25rem; }
+.pei-why-us__item-text { opacity:.95; }
+@media (min-width: 768px){ .pei-why-us__panel { padding: 1.5rem; } }

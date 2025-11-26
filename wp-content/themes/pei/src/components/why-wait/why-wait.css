@@ -1,0 +1,56 @@
+.pei-why-wait { padding: 2rem 0; }
+
+.pei-why-wait__wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 1100px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+}
+
+.pei-why-wait__left,
+.pei-why-wait__right {
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.pei-why-wait__left { background: #f4f6f8; }
+.pei-why-wait__title { font-size: 2rem; margin: 0 0 .5rem; }
+.pei-why-wait__subtitle { font-size: 1.1rem; color: #555; margin: 0; }
+
+.pei-why-wait__right {
+  background: var(--secondary, #d9230f);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.pei-why-wait__cta-title { font-size: 1.5rem; margin: 0 0 .25rem; }
+.pei-why-wait__cta-sub { margin: 0 0 1rem; opacity: .95; }
+
+.pei-why-wait__button {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  background: #fff;
+  color: var(--secondary, #d9230f);
+  text-decoration: none;
+  font-weight: 700;
+  padding: .8rem 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.25);
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+.pei-why-wait__button:hover { transform: translateY(-1px); box-shadow: 0 12px 28px rgba(0,0,0,.3); }
+.pei-why-wait__icon { font-size: 1.25rem; line-height: 1; }
+.pei-why-wait__label { font-size: 1.2rem; }
+
+@media (min-width: 850px){
+  .pei-why-wait__wrap { flex-direction: row; }
+  .pei-why-wait__left, .pei-why-wait__right { width: 50%; text-align: left; padding: 3rem 2.5rem; }
+}

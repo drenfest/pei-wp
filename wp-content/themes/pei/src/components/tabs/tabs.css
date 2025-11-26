@@ -1,0 +1,243 @@
+/* =======================================
+   PEI Tabs – branded, stacked & animated
+   ======================================= */
+
+.pei-tabs {
+    padding: 2.5rem 0 3rem;
+}
+
+.pei-tabs .container {
+    /* inherits global .container */
+}
+
+/* ---------- Tab Nav ---------- */
+
+.pei-tabs__nav {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap; /* keep tabs on one line; allow horizontal scroll if needed */
+    gap: 8px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.06);
+    margin-bottom: 16px;
+    padding-bottom: 4px;
+
+    /* horizontal scroll only */
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    /* hide scrollbars cross-browser */
+    -ms-overflow-style: none;  /* IE/Edge */
+    scrollbar-width: none;     /* Firefox */
+}
+
+/* hide scrollbar for WebKit */
+.pei-tabs__nav::-webkit-scrollbar {
+    display: none;
+}
+
+/* Base tab button */
+.pei-tabs__tab {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: var(--secondary);
+    padding: 10px 16px;
+    border-radius: 6px 6px 0 0;
+    border: 1px solid transparent;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    position: relative;
+    transition:
+            color 0.15s ease,
+            background-color 0.15s ease,
+            border-color 0.15s ease,
+            transform 0.1s ease;
+}
+
+/* Hover state */
+.pei-tabs__tab:hover {
+    background: rgba(0, 0, 0, 0.02);
+    color: var(--secondary);
+}
+
+/* Active tab look */
+.pei-tabs__tab.is-active {
+    background: #ffffff;
+    color: var(--secondary);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Sliding gold indicator bar (one per nav, moved by JS) */
+.pei-tabs__indicator {
+    position: absolute;
+    bottom: -3px;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 999px;
+    width: 0;
+    transform: translateX(0);
+    transition:
+            transform 0.25s ease-out,
+            width 0.25s ease-out;
+    pointer-events: none;
+}
+
+/* ---------- Tab Panes ---------- */
+
+.pei-tabs__panes {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/*
+  Stacked panes:
+  - All panes are absolutely positioned on top of each other
+  - Only the active pane is visible and interactive
+  - Container height is fixed via JS to tallest pane, so the page doesn't move
+*/
+.pei-tabs__pane {
+    position: absolute;
+    inset: 0;
+    padding: 16px;
+    color: var(--secondary);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(40px);
+    background: #ffffff;
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    transition:
+            opacity 0.26s ease-out,
+            transform 0.26s ease-out;
+}
+
+/* Active pane is on top, visible & interactive */
+.pei-tabs__pane.is-active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+}
+
+/* Extra "pop" animation when a pane becomes active (triggered via class) */
+.pei-tabs__pane--anim-in {
+    animation: peiTabsFadeSlideIn 260ms ease-out both;
+}
+
+/* ---------- Media + Content ---------- */
+
+.pei-tabs__media {
+    margin-bottom: 12px;
+}
+
+.pei-tabs__media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Text content */
+.pei-tabs__content p {
+    margin: 0 0 0.85rem;
+    line-height: 1.6;
+    color: var(--secondary);
+}
+
+.pei-tabs__content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Headings inside tab content */
+.pei-tabs__content h2,
+.pei-tabs__content h3,
+.pei-tabs__content h4 {
+    margin-top: 0;
+    margin-bottom: 0.6rem;
+    color: var(--secondary);
+}
+
+.pei-tabs__content h2 {
+    font-size: 1.35rem;
+}
+
+.pei-tabs__content h3 {
+    font-size: 1.15rem;
+}
+
+.pei-tabs__content h4 {
+    font-size: 1.05rem;
+}
+
+/* Lists inside panes */
+.pei-tabs__content ul {
+    padding-left: 1.2rem;
+    margin: 0.25rem 0 0.85rem;
+}
+
+.pei-tabs__content li {
+    margin-bottom: 0.4rem;
+}
+
+/* Links inside tab content – use theme gold */
+.pei-tabs__content a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.pei-tabs__content a:hover,
+.pei-tabs__content a:focus {
+    text-decoration: underline;
+}
+
+/* ---------- Responsive layout ---------- */
+
+@media (min-width: 768px) {
+    .pei-tabs {
+        padding: 3rem 0 3.5rem;
+    }
+
+    .pei-tabs__pane {
+        padding: 20px 22px;
+    }
+}
+
+/* Desktop: grid layout inside the active pane (visually, not for positioning) */
+@media (min-width: 992px) {
+    .pei-tabs__pane .pei-tabs__media {
+        margin-bottom: 0;
+    }
+
+    .pei-tabs__pane .pei-tabs__content-wrapper {
+        display: grid;
+        grid-template-columns: 1.05fr 1.4fr;
+        gap: 20px;
+        align-items: flex-start;
+    }
+}
+
+/* ---------- Accessibility and focus ---------- */
+
+.pei-tabs__tab:focus-visible {
+    outline: 3px solid #2b6cb0;
+    outline-offset: 2px;
+}
+
+/* ---------- Keyframes ---------- */
+
+@keyframes peiTabsFadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

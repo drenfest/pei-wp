@@ -1,0 +1,4 @@
+.pei-divider { display:flex; gap:8px; align-items:center; justify-content:center; padding: 12px 0; }
+.pei-divider__line { display:block; height:2px; width:120px; background: rgba(255,255,255,0.12); position:relative; }
+.pei-divider--accent .pei-divider__line:first-child { background: var(--primary, #1d2733); }
+.pei-divider--thick .pei-divider__line { height:4px; }

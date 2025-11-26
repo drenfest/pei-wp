@@ -115,6 +115,83 @@ Config highlights (vite.config.js)
 - SCSS supported (preprocessorOptions.scss)
 - Manifest file enabled for PHP integration
 
+Blocks and components: how they function today
+
+- Philosophy: keep the front end lean and server-rendered. The theme primarily uses core Gutenberg blocks styled via the main `style.css` so what you see in the editor matches the front end (thanks to `add_editor_style('style.css')`).
+- Custom pieces live under `src/components/<name>/` and are currently implemented as simple PHP templates/shortcodes rather than fully registered custom block types. You’ll see files like `hero/hero.php`, `services/services.php`, and `simple-cta/simple-cta.php`.
+- Because there is no PHP manifest loader yet, component-specific assets built by Vite are not automatically enqueued on the front end or in the editor. Until that glue is added, favor placing production CSS in the single `style.css`, and keep any experimental editor JS in `src/components/*/*-editor.js` for future use.
+
+Typical component folder contents
+- `<component>.php` — server-rendered template (can be included from a theme template or wired as a shortcode).
+- `<component>.css` — styles authored near the component during development; today these should be merged into `style.css` for production until Vite bundles are enqueued via the manifest.
+- `<component>-editor.js` (optional) — editor-only behaviors or block UI scaffolding. Vite will pick this up as its own entry, but enqueueing is pending.
+
+How components render in practice
+- In templates you can include a component’s PHP file directly (e.g., `get_template_part()` or `require`), or expose it via a shortcode if convenient. The PHP emits semantic HTML. Styling comes from `style.css` today.
+- Core blocks (Paragraph, Heading, Columns, etc.) are styled globally by `style.css`. That same stylesheet is loaded inside the editor so the editing experience is visually consistent.
+
+Build pattern for blocks/components
+
+- Auto-discovered entries: Vite automatically treats every `src/components/*/*.js` as an entry in addition to `src/main.js`.
+- CSS extraction: If a component JS imports CSS/SCSS (e.g., `import './simple-cta.css'`), Vite extracts it to `dist/assets/*.css` alongside the JS chunk.
+- Output mapping: `dist/manifest.json` maps entry keys (like `src/components/simple-cta/simple-cta-editor.js`) to their hashed JS and CSS URLs under `/wp-content/themes/pei/dist/assets/...`.
+- Enqueue strategy (planned):
+  1) Front end — read the manifest, resolve the entry for the component, enqueue its CSS and JS if needed.
+  2) Editor — hook into `enqueue_block_editor_assets`, resolve and enqueue any `*-editor.js` (and its extracted CSS) that you want available in the block editor.
+  3) Keep `PEI_VERSION` for non-Vite assets; rely on hashed filenames for Vite outputs.
+
+Example: simple-cta component
+
+Folder
+```
+src/components/simple-cta/
+  simple-cta.php
+  simple-cta.css
+  simple-cta-editor.js   (optional; picked up by Vite)
+```
+
+Editor script stub (`src/components/simple-cta/simple-cta-editor.js`)
+```
+// This file is discovered and built by Vite as its own entry.
+// Use it later to register a custom block, add block styles/variations,
+// or enhance the editor UI. For now, keep it minimal.
+import './simple-cta.css';
+
+window.pei = Object.assign(window.pei || {}, {
+  editorReady: (fn) => (document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn))
+});
+
+window.pei.editorReady(() => {
+  // Editor-only behavior can go here.
+});
+```
+
+Front-end rendering (`src/components/simple-cta/simple-cta.php`)
+```
+<?php
+// Minimal server-rendered example. Include this from a template or wire as a shortcode.
+?>
+<section class="simple-cta" role="region" aria-label="Call to action">
+  <div class="container">
+    <h2 class="simple-cta__title">Ready to start your project?</h2>
+    <a class="btn btn--gold" href="/contact">Contact us</a>
+  </div>
+</section>
+```
+
+Until the manifest loader is added, copy needed CSS into the main `style.css` so the component renders correctly in production. Once the loader exists, you can keep CSS colocated and let PHP enqueue the extracted `dist/assets/*.css`.
+
+Checklist: add a new block/component today
+1) Create `src/components/<name>/` and add your `php` and `css` files.
+2) If you plan editor behavior, create `<name>-editor.js` and import your CSS there as well.
+3) Run `npm run build` during development to produce `dist/` outputs you can inspect.
+4) For production until enqueue glue is in place, merge the essential CSS into `style.css`.
+5) Include the PHP from your theme template (or register a shortcode) to render the component.
+
+What’s next for blocks/components
+- Add a small PHP helper that reads `dist/manifest.json` and enqueues entry points (front end and editor). This will unlock colocated CSS/JS per component and optional custom block registration without bloating the global bundle.
+- Document the enqueue helper and provide examples mapping `src/components/*/*-editor.js` to `enqueue_block_editor_assets` once added.
+
 How to load dist assets in WordPress (optional)
 The theme currently enqueues style.css and assets/js/navigation.js directly to stay lean. If you choose to consume the Vite-built assets in PHP:
 1) Build the assets: `npm run build`

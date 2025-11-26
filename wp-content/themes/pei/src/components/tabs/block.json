@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "pei/tabs",
+  "version": "1.0.0",
+  "title": "Tabs (PEI)",
+  "category": "pei",
+  "icon": "index-card",
+  "description": "Branded tabbed content.",
+  "supports": { "html": false, "anchor": true, "align": ["wide", "full"] },
+  "attributes": {
+    "tabs": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": { "type": "string" },
+          "content": { "type": "string" },
+          "imageId": { "type": "number" },
+          "imageUrl": { "type": "string" }
+        }
+      }
+    },
+    "active": { "type": "number", "default": 0 }
+  },
+  "render": "file:./tabs.php"
+}
